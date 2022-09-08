@@ -113,7 +113,7 @@ contains(names, 'Colt', result => {
 const uniq = (arr, cb) => {
   for (i = 0; i < arr.length; i++){
     for (x = i+1; x < arr.length; x++){
-      if (i === x){
+      if (arr[i] === arr[x]){
         arr.splice(x,1)
         x--
       }
@@ -140,7 +140,7 @@ uniq(names, uniqArr => console.log(`The new names array with all the duplicate i
 */
 
 // CODE HERE 
-
+const each = (arr, cb) => arr.forEach((nm, i) => cb(nm, i))
 
 /*
   Invoke the each function, passing in the names array and a callback function.
@@ -150,7 +150,7 @@ uniq(names, uniqArr => console.log(`The new names array with all the duplicate i
 */
 
 // CODE HERE
-
+each(names, (item, index) => console.log(`The item at index ${index} is ${item}.`))
 
 ////////// PROBLEM 7 //////////
 
@@ -183,15 +183,21 @@ var users = [
 // Do not edit the code above.
 
 // CODE HERE 
-
+const getUserById = (arr, id, cb) => {
+  for (i = 0; i < arr.length; i++) {
+    if (arr[i].id === id){
+      return cb(arr[i])
+    }
+  }
+}
 
 // UNCOMMENT THE FUNCTION CALL BELOW
 // RUN THIS FILE WITH NODE
 // CHECK YOUR ANSWER
 
-// getUserById(users, '16t', user => {
-//   console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address) 
-// })
+getUserById(users, '16t', user => {
+  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address) 
+})
 
 ////////// CHALLENGE //////////
 
@@ -210,6 +216,7 @@ var users = [
 */
 
 // CODE HERE
+const addingFactory = (num) => (num2) => (num + num2)
 
 /*
   Now that you have addingFactory, you can create other
@@ -224,7 +231,7 @@ var users = [
 */
 
 // CODE HERE
-
+let addTen = addingFactory(10)
 /*
   Now the inner function is stored in the addTen variable! 
 
@@ -236,7 +243,8 @@ var users = [
 */
 
 // CODE HERE
-
+console.log(addTen(5))
+console.log(addTen(54))
 /*
   Let's make another function from the addingFactory. 
 
@@ -249,3 +257,6 @@ var users = [
 */
 
 // CODE HERE
+let addThirteen = addingFactory(13);
+console.log(addThirteen(13))
+console.log(addThirteen(54))
